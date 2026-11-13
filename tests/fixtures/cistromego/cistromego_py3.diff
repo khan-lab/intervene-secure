@@ -1,0 +1,166 @@
+--- a/cistromego/corelib.py	2026-11-13 18:02:18
++++ b/cistromego/corelib.py	2026-11-13 18:09:27
+@@ -1,10 +1,12 @@
+ import time
+ import json
+-from pkg_resources import resource_filename
++import os
++DATA = os.environ['CGO_DATA']
++def resource_filename(pkg, rel): return os.path.join(DATA, rel[len('data/'):])
+ 
+ 
+ def Info(infoStr):
+-    print "[%s] %s" % (time.strftime('%H:%M:%S'), infoStr)
++    print("[%s] %s" % (time.strftime("%H:%M:%S"), infoStr))
+ 
+ 
+ def readJson(file_name):
+@@ -15,7 +17,7 @@
+ def readCoordinate(assembly):
+     genome = resource_filename('cistromego','data/%s_nodup.refseq' % assembly)
+     coordinate = []
+-    with open(genome, "rU") as gfile:
++    with open(genome, "r") as gfile:
+         for line in gfile.readlines():
+             coordinate.append((line.rstrip().split("\t")[1], int(line.rstrip().split("\t")[6]), 1, line.rstrip().split("\t")[0]))
+     return coordinate
+@@ -44,5 +46,5 @@
+     c_min = min(vector)
+     c_max = max(vector)
+     c_gap = c_max - c_min
+-    res_vec = map(lambda x: (x-c_min)/c_gap, vector)
++    res_vec = list(map(lambda x: (x-c_min)/c_gap, vector))
+     return res_vec
+--- a/cistromego/rpscore.py	2026-11-13 18:02:18
++++ b/cistromego/rpscore.py	2026-11-13 18:09:27
+@@ -18,7 +18,7 @@
+                 A[elem[-1]] = [elem[0], elem[1]]
+                 D[elem[-1]] = float("inf")
+             else:
+-                for peak in A.keys():
++                for peak in list(A.keys()):
+                     p_elem = A[peak]
+                     if p_elem[0] == elem[0]:
+                         D[peak] = elem[1] - p_elem[1]
+@@ -30,7 +30,7 @@
+             if elem[2] == PEAK:
+                 A[elem[-1]] = [elem[0], elem[1]]
+             else:
+-                for peak in A.keys():
++                for peak in list(A.keys()):
+                     p_elem = A[peak]
+                     if p_elem[0] == elem[0]:
+                         D[peak] = min(p_elem[1] - elem[1], D[peak])
+@@ -74,7 +74,7 @@
+             D[elem[-1]] = []
+         else:
+             dlist = []
+-            for gene_name in A.keys():
++            for gene_name in list(A.keys()):
+                 g = A[gene_name]
+                 if (g[0] != elem[0]) or ((elem[1] - g[1]) > padding):
+                     dlist.append(gene_name)
+@@ -87,7 +87,7 @@
+             A2[elem[-1]] = [elem[0], elem[1]]
+             D2[elem[-1]] = float("inf")
+         else:
+-            for peak in A2.keys():
++            for peak in list(A2.keys()):
+                 p_elem = A2[peak]
+                 if p_elem[0] == elem[0]:
+                     D2[peak] = elem[1] - p_elem[1]
+@@ -101,7 +101,7 @@
+             A[elem[-1]] = [elem[0], elem[1]]
+         else:
+             dlist = []
+-            for gene_name in A.keys():
++            for gene_name in list(A.keys()):
+                 g = A[gene_name]
+                 if (g[0] != elem[0]) or (-(elem[1] - g[1]) > padding):
+                     dlist.append(gene_name)
+@@ -113,7 +113,7 @@
+         if elem[2] == PEAK:
+             A2[elem[-1]] = [elem[0], elem[1]]
+         else:
+-            for peak in A2.keys():
++            for peak in list(A2.keys()):
+                 p_elem = A2[peak]
+                 if p_elem[0] == elem[0]:
+                     D2[peak] = min(p_elem[1] - elem[1], D2[peak])
+@@ -121,7 +121,7 @@
+                 else:
+                     A2.pop(peak)
+ 
+-    for gene_name in A.keys():
++    for gene_name in list(A.keys()):
+         D[gene_name] += A.pop(gene_name)[2:]
+ 
+     # D2_values= D2.values()
+@@ -154,7 +154,7 @@
+             symbol_rp_tmp = {}
+             for i in symbol_ref[symbol]:
+                 symbol_rp_tmp[i] = RP[i]
+-            ref_maxrp = max(symbol_rp_tmp.iteritems(), key=operator.itemgetter(1))[0]
++            ref_maxrp = max(symbol_rp_tmp.items(), key=operator.itemgetter(1))[0]
+             res_table_data.append(
+                 [symbol, coordinate[ref_maxrp][0], len(D[ref_maxrp]), max(symbol_rp_tmp.values())])
+             # symbol_rp[symbol] = max(symbol_rp_tmp.values())
+--- a/cistromego/file_check.py	2026-11-13 18:02:18
++++ b/cistromego/file_check.py	2026-11-13 18:09:27
+@@ -26,14 +26,14 @@
+             pass
+         return check_res
+ 
+-    with open(file_path, "rU") as pfile:
++    with open(file_path, "r") as pfile:
+         lines = pfile.readlines()
+         for line in lines:
+             if line.startswith("#"):
+                 continue
+             else:
+                 first_line = line
+-                last_line = lines[len(lines)/2]
++                last_line = lines[len(lines)//2]
+                 break
+     res = {"fivecol": False, "pass": False}
+     res_head = checkHeadTail(first_line)
+@@ -59,7 +59,7 @@
+     peaks = []  # chr summit peak None
+     peaki = 0
+     if check_bed_res["fivecol"]:
+-        with open(file_path, "rU") as pfile:
++        with open(file_path, "r") as pfile:
+             for line in pfile:
+                 if line.startswith("#"):
+                     continue
+@@ -78,7 +78,7 @@
+             peaks_top = peaks[:float(peakn)*peaki]
+ 
+     else:
+-        with open(file_path, "rU") as pfile:
++        with open(file_path, "r") as pfile:
+             for line in pfile:
+                 if line.startswith("#"):
+                     continue
+@@ -107,10 +107,10 @@
+ 
+     for sep in ["\t", ",", " "]:
+         res_check = {"pass": True, "sep": sep}
+-        with open(file_path, "rU") as exprfile:
++        with open(file_path, "r") as exprfile:
+             lines = exprfile.readlines()
+             first_line = lines[1].strip().split(sep)
+-            last_line = lines[len(lines)/2].strip().split(sep)
++            last_line = lines[len(lines)//2].strip().split(sep)
+         check_first_line = (is_refseq(first_line[gene_column]) or is_genesymbol(first_line[gene_column])) and is_value(first_line[logfc_column]) and is_value(first_line[fdr_column])
+         check_last_line = (is_refseq(last_line[gene_column]) or is_genesymbol(last_line[gene_column])) and is_value(last_line[logfc_column]) and is_value(last_line[fdr_column])
+ 
+@@ -163,7 +163,7 @@
+     logfc_column = int(expr_info.split(",")[1]) - 1
+     fdr_column = int(expr_info.split(",")[2]) - 1
+     expr_list = []
+-    with open(expr_path, "rU") as exprfile:
++    with open(expr_path, "r") as exprfile:
+         for line in exprfile:
+             try:
+                 tmp = line.strip().split(check_expr_res["sep"])

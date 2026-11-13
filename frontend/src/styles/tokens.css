@@ -1,0 +1,62 @@
+/*
+ * Design tokens ported verbatim from design/reference.html (the UI source
+ * of truth — see PLAN.md §9). Keep this file in sync with that file: if
+ * reference.html's :root / [data-theme="dark"] blocks change, update here
+ * and say so explicitly in the commit message (per CLAUDE.md).
+ */
+
+/* Fonts are self-hosted (Fontsource, SIL OFL 1.1; imported in main.tsx) —
+   no request to a font CDN, so nothing leaves the browser and the app works
+   offline. */
+
+:root {
+  --canvas: #edf0f4;
+  --panel: #ffffff;
+  --panel-2: #f5f7fa;
+  --panel-3: #eaeef3;
+  --line: #dce2ea;
+  --line-strong: #c2ccd8;
+  --ink: #101826;
+  --ink-2: #55637a;
+  --ink-3: #8b97a9;
+  --accent: #2b4ae0;
+  --accent-ink: #1b32a8;
+  --accent-soft: #e6eaff;
+  --sig: #0d7c6b;
+  --sig-soft: #e0f2ed;
+  --warn: #a6660c;
+  --warn-soft: #fbf0dc;
+  --danger: #a9241d;
+  --danger-soft: #fbe9e7;
+  --r: 7px;
+  --rail: 268px;
+  --aside: 400px;
+  --shadow: 0 1px 2px rgba(16, 24, 38, 0.06), 0 8px 24px rgba(16, 24, 38, 0.06);
+}
+
+[data-theme="dark"] {
+  --canvas: #0b0f16;
+  --panel: #141a24;
+  --panel-2: #1a222e;
+  --panel-3: #212b39;
+  --line: #26313f;
+  --line-strong: #39465a;
+  --ink: #e7ecf3;
+  --ink-2: #94a2b6;
+  --ink-3: #6c7b90;
+  --accent: #7089ff;
+  --accent-ink: #a9b8ff;
+  --accent-soft: #1b2440;
+  --sig: #4fbfa5;
+  --sig-soft: #12302a;
+  --warn: #dfa64a;
+  --warn-soft: #332616;
+  --danger: #e0736a;
+  --danger-soft: #331917;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-ligatures: none;
+}

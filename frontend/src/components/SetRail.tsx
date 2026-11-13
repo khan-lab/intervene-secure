@@ -124,7 +124,12 @@ function AnnotationGroup({ category, count, children }: { category: string; coun
   );
 }
 
+/** One column below this width (App.css): the rail sits above the plots. */
+const NARROW = "(max-width: 1180px)";
+const isNarrow = () => typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia(NARROW).matches;
+
 export function SetRail() {
+  const [annoOpen, setAnnoOpen] = useState(() => !isNarrow());
   const sets = useStore((s) => s.sets);
   const status = useStore((s) => s.status);
   const error = useStore((s) => s.error);
@@ -376,56 +381,63 @@ export function SetRail() {
         </div>
       </div>
 
-      <div className="eyebrow" style={{ margin: "20px 0 6px" }}>
-        External annotations
-      </div>
-      <div className="card">
-        <div className="bd" style={{ paddingTop: 4 }}>
-          {ANNOTATION_CATEGORIES.map((category) => {
-            const items = EXTERNAL_ANNOTATIONS.filter((a) => a.assembly === assembly && a.category === category);
-            if (!items.length) return null;
-            return (
-              <AnnotationGroup key={category} category={category} count={items.length}>
-                {items.map((a) => {
-                  const added = sets.some((s) => s.fileName === `${a.id}.bed`);
-                  return (
-                    <div className="param" key={a.id}>
-                      <div style={{ minWidth: 0 }}>
-                        <div style={{ fontSize: 12.5, color: "var(--ink)" }}>
-                          {a.name}{" "}
-                          <a className="annosrc" href={a.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${a.name} source`}>
-                            source
-                          </a>
+      {/* Collapsible so that on phones (one column) the plots aren't below a long list; open by default on wide screens. */}
+      <details className="railsection" open={annoOpen} onToggle={(e) => setAnnoOpen(e.currentTarget.open)}>
+        <summary className="eyebrow" style={{ margin: "20px 0 6px" }}>
+          <span className="caret" aria-hidden="true">
+            ▸
+          </span>
+          External annotations
+          <span className="railcount">{EXTERNAL_ANNOTATIONS.filter((a) => a.assembly === assembly).length}</span>
+        </summary>
+        <div className="card">
+          <div className="bd" style={{ paddingTop: 4 }}>
+            {ANNOTATION_CATEGORIES.map((category) => {
+              const items = EXTERNAL_ANNOTATIONS.filter((a) => a.assembly === assembly && a.category === category);
+              if (!items.length) return null;
+              return (
+                <AnnotationGroup key={category} category={category} count={items.length}>
+                  {items.map((a) => {
+                    const added = sets.some((s) => s.fileName === `${a.id}.bed`);
+                    return (
+                      <div className="param" key={a.id}>
+                        <div style={{ minWidth: 0 }}>
+                          <div style={{ fontSize: 12.5, color: "var(--ink)" }}>
+                            {a.name}{" "}
+                            <a className="annosrc" href={a.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${a.name} source`}>
+                              source
+                            </a>
+                          </div>
+                          <div className="hint" style={{ margin: "2px 0 0" }}>
+                            {a.description}
+                          </div>
                         </div>
-                        <div className="hint" style={{ margin: "2px 0 0" }}>
-                          {a.description}
-                        </div>
+                        {a.path ? (
+                          <button
+                            className="ghost"
+                            style={{ flex: "none" }}
+                            disabled={added || sets.length >= MAX_SETS}
+                            title={added ? "Already added" : sets.length >= MAX_SETS ? `Up to ${MAX_SETS} sets — remove one first` : `Add ${a.name} as a region set`}
+                            aria-label={`Add ${a.name}`}
+                            onClick={() => void addExternalAnnotation(a)}
+                          >
+                            {added ? "Added" : "Add"}
+                          </button>
+                        ) : (
+                          <span className="annosoon">{a.unavailableReason}</span>
+                        )}
                       </div>
-                      {a.path ? (
-                        <button
-                          className="ghost"
-                          style={{ flex: "none" }}
-                          disabled={added || sets.length >= MAX_SETS}
-                          title={added ? "Already added" : sets.length >= MAX_SETS ? `Up to ${MAX_SETS} sets — remove one first` : `Add ${a.name} as a region set`}
-                          aria-label={`Add ${a.name}`}
-                          onClick={() => void addExternalAnnotation(a)}
-                        >
-                          {added ? "Added" : "Add"}
-                        </button>
-                      ) : (
-                        <span className="annosoon">{a.unavailableReason}</span>
-                      )}
-                    </div>
-                  );
-                })}
-              </AnnotationGroup>
-            );
-          })}
-          {!EXTERNAL_ANNOTATIONS.some((a) => a.assembly === assembly) && (
-            <div className="hint">No built-in annotation sets for this assembly yet.</div>
-          )}
+                    );
+                  })}
+                </AnnotationGroup>
+              );
+            })}
+            {!EXTERNAL_ANNOTATIONS.some((a) => a.assembly === assembly) && (
+              <div className="hint">No built-in annotation sets for this assembly yet.</div>
+            )}
+          </div>
         </div>
-      </div>
+      </details>
 
 
       <div className="eyebrow" style={{ margin: "20px 0 6px" }}>

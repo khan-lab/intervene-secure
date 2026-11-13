@@ -761,10 +761,14 @@ footer .free .dot {
     overflow: visible;
   }
   .work {
-    grid-template-columns: 1fr;
+    /* minmax(0, …): a 1fr track can't shrink below its widest content (the
+       UpSet SVG), which stretched every card to ~700 px on phones. Wide
+       plots scroll sideways inside their own card instead. */
+    grid-template-columns: minmax(0, 1fr);
   }
   .col {
     overflow: visible;
+    min-width: 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1085,4 +1089,68 @@ svg text.selectable:focus-visible {
   height: 100%;
   background: var(--accent);
   transition: width 0.25s ease;
+}
+
+/* ---------- rail: collapsible External annotations ---------- */
+.railsection > summary {
+  cursor: pointer;
+  list-style: none;
+}
+.railsection > summary::-webkit-details-marker {
+  display: none;
+}
+.railsection .caret {
+  display: inline-block;
+  transition: transform 0.15s;
+  font-size: 9px;
+}
+.railsection[open] .caret {
+  transform: rotate(90deg);
+}
+.railsection .railcount {
+  order: 2;
+  margin-left: 4px;
+}
+.railsection > summary::after {
+  order: 1;
+}
+
+/* ---------- phones and narrow windows ---------- */
+@media (max-width: 760px) {
+  header.top {
+    height: 56px;
+    gap: 10px;
+  }
+  /* The tagline can't fit next to the logo; the page title and README carry it. */
+  .brand .eyebrow {
+    display: none;
+  }
+  .topnav {
+    margin-left: auto;
+  }
+  .col {
+    padding: 12px;
+  }
+  /* View tabs scroll sideways; Export moves to its own line. */
+  .col.mid > .rowsplit {
+    flex-wrap: wrap;
+  }
+  .col.mid > .rowsplit > .tabs {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .col.mid > .rowsplit > .tabs .tab {
+    flex: none;
+  }
+  .col.mid > .rowsplit > .ghost {
+    width: 100%;
+  }
+  /* Tables wider than the screen scroll inside their card. */
+  .plotcard {
+    overflow-x: auto;
+  }
+  .plotcard > .subtable {
+    min-width: 420px;
+  }
 }

@@ -138,7 +138,7 @@ function App() {
     <div className="shell">
       <header className="top">
         <div className="brand">
-          <h1><img src="logo.svg" width="100" alt="Intervene Web" /></h1>
+          <h1><img src="logo.png" width="100" alt="Intervene Secure" /></h1>
           <span className="eyebrow">A secure platform for in-browser genomic intersections, annotation and enrichment without data upload</span>
         </div>
         <nav className="topnav" aria-label="Site">

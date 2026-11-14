@@ -2,9 +2,83 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Intervene — A secure tool for genomic intersections, annotation and enrichment in the browser</title>
+    <title>Intervene Secure — A secure platform for genomic intersections, annotation and enrichment in the browser</title>
+    <meta
+      name="description"
+      content="Intersect, annotate and test genomic region sets (BED, narrowPeak, VCF) for enrichment entirely in your browser with bedtools compiled to WebAssembly. No data upload, no login: safe for patient and other sensitive data."
+    />
+    <meta
+      name="keywords"
+      content="genomic intersection, UpSet plot, Venn diagram, bedtools, WebAssembly, BED, narrowPeak, VCF, ChIP-seq, region annotation, enrichment analysis, GO enrichment, GREAT, Cistrome-GO, privacy, no data upload"
+    />
+    <meta name="author" content="Aziz Khan" />
+    <meta name="application-name" content="Intervene Secure" />
+    <link rel="canonical" href="https://khan-lab.github.io/intervene-secure/" />
+
+    <!-- Privacy: links to other sites (AmiGO, DOIs) do not send this page's URL as referrer. -->
+    <meta name="referrer" content="no-referrer" />
+    <!-- Stop iOS turning region counts and coordinates into phone-number links. -->
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Icons and browser chrome (the app has a light theme only) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
+    <meta name="apple-mobile-web-app-title" content="Intervene" />
+
+    <!-- Link previews (Open Graph: Slack, LinkedIn, Mastodon, ...; Twitter/X card) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Intervene Secure" />
+    <meta property="og:title" content="Intervene Secure — genomic intersections, annotation and enrichment in the browser" />
+    <meta
+      property="og:description"
+      content="Intersect, annotate and test genomic region sets for enrichment in your browser with bedtools in WebAssembly. Files are never uploaded."
+    />
+    <meta property="og:url" content="https://khan-lab.github.io/intervene-secure/" />
+    <meta property="og:image" content="https://khan-lab.github.io/intervene-secure/intervene-secure.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1632" />
+    <meta property="og:image:height" content="802" />
+    <meta property="og:image:alt" content="Intervene Secure" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Intervene Secure — genomic intersections, annotation and enrichment in the browser" />
+    <meta
+      name="twitter:description"
+      content="Intersect, annotate and test genomic region sets for enrichment in your browser with bedtools in WebAssembly. Files are never uploaded."
+    />
+    <meta name="twitter:image" content="https://khan-lab.github.io/intervene-secure/intervene-secure.png" />
+    <meta name="twitter:image:alt" content="Intervene Secure" />
+
+    <!-- Structured data for search engines and tool registries (schema.org) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Intervene Secure",
+        "alternateName": "Intervene",
+        "url": "https://khan-lab.github.io/intervene-secure/",
+        "description": "Intersect, annotate and test genomic region sets (BED, narrowPeak, VCF) for enrichment entirely in the browser with bedtools compiled to WebAssembly. No data upload.",
+        "applicationCategory": "Bioinformatics",
+        "operatingSystem": "Any (web browser)",
+        "browserRequirements": "Requires JavaScript and WebAssembly",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "license": "https://opensource.org/licenses/MIT",
+        "codeRepository": "https://github.com/khan-lab/intervene-secure",
+        "image": "https://khan-lab.github.io/intervene-secure/intervene-secure.png",
+        "author": { "@type": "Organization", "name": "CBCRG Lab", "url": "https://khanlab.bio" },
+        "citation": {
+          "@type": "ScholarlyArticle",
+          "name": "Intervene: a tool for intersection and visualization of multiple gene or genomic region sets",
+          "author": ["Aziz Khan", "Anthony Mathelier"],
+          "isPartOf": { "@type": "Periodical", "name": "BMC Bioinformatics" },
+          "datePublished": "2017",
+          "sameAs": "https://doi.org/10.1186/s12859-017-1708-7"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

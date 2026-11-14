@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 387.91 190.07">
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 391.53 192.31">
   <!-- Generator: Adobe Illustrator 31.0.0, SVG Export Plug-In . SVG Version: 2.1.5 Build 84)  -->
   <defs>
     <style>
@@ -15,27 +15,22 @@
         opacity: .8;
       }
 
-      .st4 {
-        fill: #fff;
-      }
-
-      .st2, .st5 {
-        fill: #f05a28;
+      .st4, .st3 {
+        fill: #327eab;
       }
 
       .st5 {
-        font-family: Seravek-Italic, Seravek;
-        font-size: 60px;
-        font-style: italic;
+        fill: #fff;
+      }
+
+      .st2, .st6 {
+        fill: #f05a28;
       }
 
       .st6 {
-        stroke: #231f20;
-        stroke-miterlimit: 10;
-      }
-
-      .st6, .st3 {
-        fill: #327eab;
+        font-family: Seravek-Italic, Seravek;
+        font-size: 60px;
+        font-style: italic;
       }
 
       .st3 {
@@ -47,12 +42,12 @@
   </defs>
   <g class="st1">
     <g class="st1">
-      <text class="st3" transform="translate(44.25 187.3)"><tspan x="0" y="0">intervene</tspan></text>
+      <text class="st3" transform="translate(47.86 189.53)"><tspan x="0" y="0">intervene</tspan></text>
     </g>
   </g>
-  <circle class="st0" cx="78.86" cy="55" r="55"/>
-  <circle class="st6" cx="55.5" cy="93.33" r="55"/>
-  <circle class="st2" cx="103.93" cy="79.85" r="55"/>
-  <path class="st4" d="M128.08,30.41c4.96,15.13-30.56,34.43-57.41,77.94-3.3,5.34-5.7,9.82-7.08,12.49-3.43,1.35-13.69,4.95-19.68,0-1.29-1.07-2.34-3.11-4.39-7.14-1.59-3.14-3.87-7.95-7.21-17.18-2.4-6.64-3.31-9.93-3.87-13.83-.77-5.44-.16-7.2.29-8.16,2.15-4.59,7.71-6.08,10.28-6.77,2.84-.76,5.67-1.51,8.57-.3,2.09.87,4.18,2.76,7.21,10.3,4.12,10.22,3.25,14.15,4.73,14.63,5.39,1.77,38.31-84.16,53.1-80.79,1.86.43,3.78,2.35,6.73,5.31C124.99,22.57,127.53,28.73,128.08,30.41Z"/>
-  <text class="st5" transform="translate(233.53 134.85)"><tspan x="0" y="0">secure</tspan></text>
+  <circle class="st0" cx="82.48" cy="57.24" r="55"/>
+  <circle class="st4" cx="59.12" cy="95.57" r="55"/>
+  <circle class="st2" cx="107.55" cy="82.09" r="55"/>
+  <path class="st5" d="M128.01,52.63c4.54,13.85-27.96,31.51-52.52,71.31-3.02,4.89-5.22,8.99-6.48,11.43-3.14,1.24-12.53,4.53-18.01,0-1.18-.98-2.14-2.84-4.01-6.53-1.46-2.87-3.54-7.27-6.6-15.72-2.2-6.07-3.03-9.08-3.54-12.65-.71-4.98-.15-6.59.26-7.47,1.97-4.2,7.06-5.56,9.41-6.19,2.6-.7,5.19-1.38,7.84-.28,1.91.8,3.83,2.53,6.6,9.43,3.77,9.35,2.97,12.94,4.33,13.38,4.93,1.62,35.05-77,48.58-73.92,1.7.4,3.46,2.15,6.16,4.86C125.19,45.46,127.51,51.1,128.01,52.63Z"/>
+  <text class="st6" transform="translate(237.15 137.09)"><tspan x="0" y="0">secure</tspan></text>
 </svg>

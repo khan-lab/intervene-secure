@@ -223,7 +223,7 @@ function App() {
                 <div className="eyebrow" style={{ marginBottom: 9 }}>
                   Selection
                 </div>
-                <SubsetChips />
+                <SubsetChips view={view} />
               </div>
             </div>
           )}
@@ -286,7 +286,7 @@ function App() {
             <div className="placeholder">
               <div className="big">Nothing selected</div>
               <div className="sm">
-                Pick one or more subsets from the plot, the Venn diagram or the table to see their regions here.
+                Click a bar or dot column in the UpSet plot, a number in the Venn diagram, or a row in the Table to see a subset's regions here.
               </div>
             </div>
           )}

@@ -566,6 +566,24 @@ header.top {
   margin-bottom: 9px;
 }
 
+.selhint {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.selhint-lead {
+  color: var(--ink-2);
+}
+.selhint ul {
+  margin: 6px 0;
+  padding-left: 18px;
+}
+.selhint li.here {
+  color: var(--ink);
+}
+.selhint b {
+  font-weight: 600;
+}
 .placeholder {
   padding: 34px 20px;
   text-align: center;
